@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Create account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="HTML & CSS">
+    <meta name="keywords" content="HTML,CSS">
+    <meta name="author" content="Tony Xia">
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">Create account</h1>
+        <p class="subtitle">Already have an account?<a href="#">Sign in</a></p>
+        <div class="FormWrapper">
+            <form action="#" method="post">
+                <div>
+                    <div class="input-field">
+                        <input value="Kersvers" placeholder="Your nickname" name="nickname" id="nickname" class="info" type="text">
+                    </div>
+                    <div class="input-field">
+                        <input placeholder="First name" name="firstname" class="info" id="firstname" type="text">
+                        <input placeholder="Last name" name="lastname" class="info" id="lastname" type="text">
+                    </div>
+                    <div class="input-field">
+                        <input placeholder="E-mail" name="E-mail" id="E-mail" class="info" type="email">
+                    </div>
+                </div>
+                <div class="ButtonWrapper">
+                    <button id="submit" type="submit" class="">
+                        <span>Sign up</span>
+                        <span class="right">&#10132</span>
+                    </button>
+                </div>
+                <div class="isAgree">
+                    <input name="isAgree" id="isAgree" type="checkbox" class="">
+                    <label>I have read and agree to the </label>
+                    <a target="_blank" href="#" class="nounderline">Terms of Service</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
