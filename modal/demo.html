@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Modal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="Modal">
+    <meta name="keywords" content="Modal">
+    <meta name="author" content="Tony Xia">
+
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="modal">
+        <mymodal></mymodal>
+    </div>
+
+    <template id="template">
+        <div role="dialog" class="modal" v-show="show" transition="fade">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div slot="modal-header" class="modal-header">
+                        <div class="modal-title">
+                            Basic Modal
+                            <button type="button" class="btn-close" @click='cancel()'>X</button>
+                        </div>
+                    </div>
+                    <div slot="modal-body" class="modal-body">
+                        <p>Some contents...</p>
+                        <p>Some contents...</p>
+                        <p>Some contents...</p>
+                    </div>
+                    <div slot="modal-footer" class="modal-footer">
+                        <button type="button" class="btn btn-default" @click='cancel()'><span>取 消</span></button>
+                        <button type="button" class="btn btn-success" @click='submit()'><span>确 定</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <script type="text/javascript">
+        Vue.component('mymodal', {
+            template: '<button v-on:click="open" class="btn btn-default">Open Modal</button>',
+            methods: {
+                open: function() {
+                    var self = this
+                    creat_new_modal()
+                },
+            }
+        })
+
+
+        function creat_new_modal() {
+            var promise = new Promise(function(resolve, reject) {
+                var MyModal = Vue.extend({})
+                var modal = new MyModal({
+                    data: {
+                        show: true,
+                    },
+                    template: '#template',
+                    methods: {
+                        showNew: function() {
+                            var self = this
+                            creat_new_modal()
+                        },
+                        submit: function() {
+                            this.show = false
+                        },
+                        cancel: function() {
+                            reject('cancel')
+                            this.show = false
+                        }
+                    },
+                    watch: {
+                        'show': function(val) {
+                            if (val === false) {
+                                this.$destroy()
+                                document.getElementById('modal').removeChild(this.$el)
+                            }
+                        }
+                    }
+                })
+
+                // 或者，在文档之外渲染并且随后挂载
+                var component = modal.$mount()
+                document.getElementById('modal').appendChild(component.$el)
+            })
+            return promise
+        }
+
+        var vm = new Vue({
+            el: '#modal',
+        })
+    </script>
+</body>
+
+</html>
